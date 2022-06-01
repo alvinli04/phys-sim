@@ -8,7 +8,7 @@ pendulum_box.height = 850
 pendulum_box.range = 1.3
 pendulum_box.title = "<h1>Double Pendulum</h1>"
 
-gg = graph(title = '<b>Phase Diagram</b>', width=750, height=500, xmin = -2*pi, xmax = 2*pi,
+gg = graph(title = '<b>Phase Diagram</b>', width=750, height=500, xmin = -pi, xmax = pi,
             align = 'left', xtitle='Angle', ytitle='Angular Velocity (rad/s)', ymin = -10, ymax=10, scroll = True)
 
 # test curve
@@ -31,8 +31,10 @@ m = mratio.value
 while True:
     rate(500)
     angle1, angle2, w1, w2 = step(angle1,angle2,w1,w2,l1,l2,1,m)
-    f1.plot(pos=(angle1,w1))
-    f2.plot(pos=(angle2,w2))
+    a = angle1-2*pi*floor((angle1+pi)/(2*pi))
+    b = angle2-2*pi*floor((angle2+pi)/(2*pi))
+    f1.plot(pos=(a,w1))
+    f2.plot(pos=(b,w2))
     if len(f1.data) > 2500:
         f1.data.pop(0)
 
