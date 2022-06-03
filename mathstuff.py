@@ -4,8 +4,8 @@ length1 = 1
 length2 = 0.9
 mass1 = 1
 mass2 = 2
-angle1 = 1.3
-angle2 = 0.9
+angle1 = 0
+angle2 = 1.5
 w1 = 0
 w2 = 0
 
