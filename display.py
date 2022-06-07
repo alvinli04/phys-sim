@@ -10,12 +10,15 @@ pendulum_box.height = 850
 pendulum_box.range = 5
 pendulum_box.title = "<h1>Double Pendulum</h1>"
 
-gg = graph(title = '<b>Phase Diagram</b>', width=750, height=500, xmin = -3, xmax = 3,
+gg = graph(title = '<b>Phase Diagram</b>', width=420, height=300, xmin = -3, xmax = 3,
+            align = 'left', xtitle='Angle (rad)', ytitle='Angular Velocity (rad / s)', ymin = -10, ymax=10, scroll = False)
+
+gh = graph(title = '<b>Phase Diagram</b>', width=420, height=300, xmin = -3, xmax = 3,
             align = 'left', xtitle='Angle (rad)', ytitle='Angular Velocity (rad / s)', ymin = -10, ymax=10, scroll = False)
 
 # test curve
-f1 = gcurve(color=color.red, dot = True, dot_color = color.red) # a graphics curve
-f2 = gcurve(color=color.green, dot = True, dot_color = color.green)
+f1 = gcurve(color=color.red, dot = True, dot_color = color.red, graph = gg) # a graphics curve
+f2 = gcurve(color=color.green, dot = True, dot_color = color.green, graph = gh)
 
 # pendulum object
 base = vector(0,3,0)
@@ -73,10 +76,10 @@ while True:
 
         s1.rotate(angle = w1 * dt, axis = vec(0,0,1), origin = base)
         b1.rotate(angle = w1 * dt, axis = vec(0,0,1), origin = base)
-        s2.rotate(angle = w1 * dt, axis = vec(0,0,1), origin = base)
         s2.rotate(angle = w2 * dt - w1 * dt, axis = vec(0,0,1), origin = base + vec(l1*sin(angle1), -l1*cos(angle1), 0))
-        b2.rotate(angle = w1 * dt, axis = vec(0,0,1), origin = base)
+        s2.rotate(angle = w1 * dt, axis = vec(0,0,1), origin = base)
         b2.rotate(angle = w2 * dt - w1 * dt, axis = vec(0,0,1), origin = base + vec(l1*sin(angle1), -l1*cos(angle1), 0))
+        b2.rotate(angle = w1 * dt, axis = vec(0,0,1), origin = base)
 
         # print(angle1, w1)
     # else:
