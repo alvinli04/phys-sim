@@ -2,23 +2,25 @@ from vpython import *
 from math import *
 from mathstuff import *
 
-dt = .002
+dt = .0005
 
-pendulum_box = canvas(userzoom = False, userpan = False, userspin = True, align = 'left')
+pendulum_box = canvas(userzoom = False, userpan = False, userspin = False, align = 'left')
 pendulum_box.width = 700
 pendulum_box.height = 850
 pendulum_box.range = 5
 pendulum_box.title = "<h1>Double Pendulum</h1>"
 
-gg = graph(title = '<b>Phase Diagram</b>', width=420, height=300, xmin = -3, xmax = 3,
+gg = graph(title = '<b>Phase Diagram, Mass 1</b>', width=420, height=300, xmin = -3, xmax = 3,
             align = 'left', xtitle='Angle (rad)', ytitle='Angular Velocity (rad / s)', ymin = -10, ymax=10, scroll = False)
 
-gh = graph(title = '<b>Phase Diagram</b>', width=420, height=300, xmin = -3, xmax = 3,
+gh = graph(title = '<b>Phase Diagram, Mass 2</b>', width=420, height=300, xmin = -3, xmax = 3,
             align = 'left', xtitle='Angle (rad)', ytitle='Angular Velocity (rad / s)', ymin = -10, ymax=10, scroll = False)
 
 # test curve
 f1 = gcurve(color=color.red, dot = True, dot_color = color.red, graph = gg) # a graphics curve
 f2 = gcurve(color=color.green, dot = True, dot_color = color.green, graph = gh)
+f1.plot(0,0)
+f2.plot(0,0)
 
 # pendulum object
 base = vector(0,3,0)
@@ -45,17 +47,33 @@ b1 = cylinder(pos = base, axis = vec(l1*sin(angle1), -l1*cos(angle1), 0), radius
 b2 = cylinder(pos = base + vec(l1*sin(angle1), -l1*cos(angle1), 0), axis = vec(l2*sin(angle2), -l2*cos(angle2), 0), radius = 0.1,color=color.green)
 
 going = False
+reset_mode = True
 
 def flip(b):
-    global going
+    global going, reset_mode
     going = not going
+    if reset_mode:
+        f1.delete()
+        f2.delete()
+        l1 = length1.value
+        l2 = length2.value
+        m = mratio.value
+        reset_mode = False
     if going: b.text = "Pause"
     else: b.text = "Go"
 
-button( bind=flip, text='Play', pos=pendulum_box.title_anchor )
+but1 = button( bind=flip, text='Play', pos=pendulum_box.title_anchor )
+
+def reset(b):
+    global going, reset_mode, but1
+    going = False
+    reset_mode = True
+    but1.text = "Go"
+
+but2 = button( bind=reset, text='Reset', pos=pendulum_box.title_anchor )
 
 while True:
-    rate(500)
+    rate(2000)
 
     if going:
         angle1, angle2, w1, w2 = step(angle1,angle2,w1,w2,l1,l2,1,m)
@@ -81,11 +99,5 @@ while True:
         b2.rotate(angle = w2 * dt - w1 * dt, axis = vec(0,0,1), origin = base + vec(l1*sin(angle1), -l1*cos(angle1), 0))
         b2.rotate(angle = w1 * dt, axis = vec(0,0,1), origin = base)
 
-        # print(angle1, w1)
-    # else:
-    #     l1 = length1.value
-    #     l2 = length2.value
-    #     m = mratio.value
-    #     w1 = 0
-    #     w2 = 0
-    #     gg.delete()
+    if reset_mode:
+        pass
