@@ -100,4 +100,4 @@ while True:
         b2.rotate(angle = w1 * dt, axis = vec(0,0,1), origin = base)
 
     if reset_mode:
-        pass
+        l1 = length1.value
