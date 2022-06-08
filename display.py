@@ -41,8 +41,8 @@ brown = vec(0.538, 0.261, 0.000)
 axis = cylinder(pos = base + vec(0,0,-1.6), axis = vec(0,0,1.8),radius = 0.2, color=brown)
 board1 = box(pos = vec(0,0,-1.6),length=2,height=6.5,width=0.6, color=brown)
 
-s1 = sphere(radius = .5, pos = base + vec(l1*sin(angle1), -l1*cos(angle1), 0),color = color.red)
-s2 = sphere(radius = .5, pos = base + vec(l1*sin(angle1), -l1*cos(angle1), 0) + vec(l2*sin(angle2), -l2*cos(angle2), 0),color=color.green)
+s1 = sphere(radius = .5, pos = base + vec(l1*sin(angle1), -l1*cos(angle1), 0),color = color.red, make_trail = True, retain = 70, trail_radius = .05)
+s2 = sphere(radius = .5, pos = base + vec(l1*sin(angle1), -l1*cos(angle1), 0) + vec(l2*sin(angle2), -l2*cos(angle2), 0),color=color.green, make_trail = True, retain = 70, trail_radius = .05)
 b1 = cylinder(pos = base, axis = vec(l1*sin(angle1), -l1*cos(angle1), 0), radius = 0.1,color=color.red)
 b2 = cylinder(pos = base + vec(l1*sin(angle1), -l1*cos(angle1), 0), axis = vec(l2*sin(angle2), -l2*cos(angle2), 0), radius = 0.1,color=color.green)
 
