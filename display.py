@@ -7,7 +7,7 @@ start_screen = canvas(userzoom = True, userpan = True, userspin = True, align = 
 start_screen.width = 700
 start_screen.height = 850
 start_screen.range = 5
-start_screen.title = "<h1>Start Screen</h1>"
+start_screen.title = "<h1>Double Pendulum</h1>Welcome! This screen displays all the variables that can be adjusted in the following interactive simulation. Click the start button when you are ready to continue.\n"
 
 base = vec(0,3,0)
 
