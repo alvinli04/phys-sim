@@ -10,6 +10,7 @@ w1 = 0
 w2 = 0
 
 
+
 def step(x1, x2, w1, w2, l1, l2, m1, m2):
     dt = 0.0005
     g = 9.8
@@ -24,3 +25,4 @@ def step(x1, x2, w1, w2, l1, l2, m1, m2):
     w2 += dt * a2
 
     return x1, x2, w1, w2
+
