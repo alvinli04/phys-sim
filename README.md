@@ -13,6 +13,7 @@ Once these conditions are set, the motion of the pendulum is animated in a displ
 
 This program uses Lagrangians and the Runge-Kutta method of simulating differential equations to predict the movement of the double pendulum. Graphics were rendered with the VPython library.
 
+## Running the Program
 To run the program, double click the `go.exe` executable. This will only work on Windows.
 
 **Note: To run the program, the user must have VPython installed.** To do so, just type `pip3 install vpython` in the shell.
